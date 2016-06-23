@@ -5,10 +5,12 @@ String time;
 int hour;
 boolean light;
 
+
+
 void setup() {
   Serial.begin(115200);
   rtc.begin();
-
+  pinMode(2, OUTPUT);
 }
 
 void loop() {
@@ -22,6 +24,7 @@ void loop() {
   char SC1 = time[1];
   hour=(SC-48)*10+SC1-48;
 
+//Light period
     if (hour>=12 && hour<=20){
         Serial.println("Lights on");
         light = true;
@@ -30,5 +33,7 @@ void loop() {
       Serial.println("Lights off");
       light = false;
     }
+    if (light==true) digitalWrite(2, HIGH);
+    else digitalWrite(2, LOW);
 
 }
